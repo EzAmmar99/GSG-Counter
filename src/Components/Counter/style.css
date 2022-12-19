@@ -1,0 +1,25 @@
+.contatiner {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-direction: row-reverse;
+  margin: 20px;
+}
+
+.minse-btn {
+  background-color: red;
+  color: white;
+  width: 35px;
+  height: 35px;
+}
+
+.plus-btn {
+  background-color: green;
+  color: white;
+  width: 35px;
+  height: 35px;
+}
+
+.result {
+  margin-top: 8px;
+}

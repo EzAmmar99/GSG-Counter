@@ -1,31 +1,17 @@
 import React, { Component } from "react";
 import "./style.css";
 class Counter extends Component {
-  state = {
-    count: 0,
-  };
-
-  onIncrement = (value) => {
-    this.setState((prevState) => ({
-      count: prevState.count + value,
-    }));
-  };
-
-  onDecrement = (value) => {
-    this.setState((prevState) => ({
-      count: prevState.count - value,
-    }));
-  };
-
   render() {
-    const { updateTotal, increment, decrement } = this.props;
+    const { count, step, onIncrement, onDecrement, updateTotal, ids } =
+      this.props;
+
     return (
       <div className="contatiner">
         <button
           className="plus-btn"
           onClick={() => {
-            this.onIncrement(increment);
-            updateTotal(increment);
+            onIncrement(step, ids);
+            updateTotal(step);
           }}
         >
           +
@@ -33,14 +19,14 @@ class Counter extends Component {
         <button
           className="minse-btn"
           onClick={() => {
-            this.onDecrement(decrement);
-            updateTotal(-decrement);
+            onDecrement(step, ids);
+            updateTotal(-step);
           }}
         >
           -
         </button>
 
-        <span className="result">{this.state.count}</span>
+        <span className="result">{count}</span>
       </div>
     );
   }

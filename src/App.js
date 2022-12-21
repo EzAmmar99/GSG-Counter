@@ -5,6 +5,34 @@ import Total from "./Components/Total";
 class App extends Component {
   state = {
     total: 0,
+    counter: [
+      { id: 0, count: 0, step: 1 },
+      { id: 1, count: 0, step: 2 },
+      { id: 2, count: 0, step: 3 },
+      { id: 3, count: 0, step: 4 },
+    ],
+  };
+
+  onIncrement = (value, id) => {
+    this.setState({
+      counter: this.state.counter.map((c) => {
+        if (c.id === id) {
+          return { ...c, count: c.count + value };
+        }
+        return c;
+      }),
+    });
+  };
+
+  onDecrement = (value, id) => {
+    this.setState({
+      counter: this.state.counter.map((c) => {
+        if (c.id === id) {
+          return { ...c, count: c.count - value };
+        }
+        return c;
+      }),
+    });
   };
 
   updateTotal = (value) => {
@@ -18,26 +46,17 @@ class App extends Component {
       <div>
         <Total total={this.state.total} />
 
-        <Counter
-          increment={1}
-          decrement={1}
-          updateTotal={this.updateTotal.bind(this)}
-        />
-        <Counter
-          increment={2}
-          decrement={2}
-          updateTotal={this.updateTotal.bind(this)}
-        />
-        <Counter
-          increment={3}
-          decrement={3}
-          updateTotal={this.updateTotal.bind(this)}
-        />
-        <Counter
-          increment={4}
-          decrement={4}
-          updateTotal={this.updateTotal.bind(this)}
-        />
+        {this.state.counter.map((ele) => (
+          <Counter
+            key={ele.id}
+            ids={ele.id}
+            count={ele.count}
+            step={ele.step}
+            onIncrement={this.onIncrement}
+            onDecrement={this.onDecrement}
+            updateTotal={this.updateTotal}
+          />
+        ))}
       </div>
     );
   }
